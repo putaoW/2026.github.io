@@ -12,13 +12,23 @@ title: 博客文章列表
         <header class="post-header">
             <h2>
                 <a href="{{ post.url | relative_url }}">
-                    {{ post.title | escape }}
+                    {% if post.title %}
+                        {{ post.title | escape }}
+                    {% else %}
+                        {{ post.name | replace: '.md', '' | replace: '-', ' ' | capitalize }}
+                    {% endif %}
                 </a>
             </h2>
             <p class="post-meta">
-                <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
-                    {{ post.date | date: "%Y年%m月%d日" }}
-                </time>
+                {% if post.date %}
+                    <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+                        {{ post.date | date: "%Y年%m月%d日" }}
+                    </time>
+                {% else %}
+                    <time datetime="{{ site.time | date_to_xmlschema }}" itemprop="datePublished">
+                        {{ site.time | date: "%Y年%m月%d日" }}
+                    </time>
+                {% endif %}
                 {% if post.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ post.author }}</span></span>{% endif %}
             </p>
         </header>

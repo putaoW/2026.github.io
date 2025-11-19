@@ -17,21 +17,17 @@ plugins:
 # 日期格式设置
 timezone: Asia/Shanghai
 
-# 默认设置
+# 默认设置 - 简化配置，允许更灵活的文章格式
 defaults:
   - scope:
       path: ""
       type: "posts"
     values:
       layout: "post"
-      author: "御坂10056号"
   - scope:
       path: ""
     values:
       layout: "default"
-
-# 保留Jekyll标准格式，但提供更灵活的日期处理
-# 文章文件名仍需遵循YYYY-MM-DD-标题.md格式，但提供更好的容错处理
 
 # 排除文件
 exclude:
