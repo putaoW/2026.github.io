@@ -17,11 +17,22 @@ plugins:
 # 日期格式设置
 timezone: Asia/Shanghai
 
+# 自定义集合用于非标准格式的文章
+collections:
+  articles:
+    output: true
+    permalink: /article/:path/
+
 # 默认设置 - 简化配置，允许更灵活的文章格式
 defaults:
   - scope:
       path: ""
       type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "articles"
     values:
       layout: "post"
   - scope:
