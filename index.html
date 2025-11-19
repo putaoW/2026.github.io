@@ -6,6 +6,17 @@ layout: default
     <h2>御坂10056号的博客</h2>
     <p>梦到啥我就往这上面写</p>
     
+    <div class="recent-updates">
+        <h3>近期更新</h3>
+        <ul>
+            <li>2025-11-19: 优化底部版权信息清晰度并改进搜索功能</li>
+            <li>2025-11-19: 删除主页代码框，移除重复标题，优化标题清晰度</li>
+            <li>2025-11-19: 修复背景图片铺满屏幕、移除footer分割线</li>
+            <li>2025-11-19: 添加主页仓库链接直接跳转、博文时间显示和搜索功能</li>
+            <li>2025-11-19: 修复文章显示问题：使用标准的_posts目录和Jekyll配置</li>
+        </ul>
+    </div>
+    
     <nav class="navigation">
         <a href="/post/" class="nav-link">📝 博客文章</a>
     </nav>
@@ -30,10 +41,37 @@ layout: default
         font-weight: bold;
     }
     
+    .welcome-section h3 {
+        color: #2c3e50;
+        margin: 15px 0 10px 0;
+        font-weight: bold;
+    }
+    
     .welcome-section p {
         color: #34495e;
         margin-bottom: 15px;
         line-height: 1.4;
+    }
+    
+    .recent-updates {
+        text-align: left;
+        margin: 15px auto;
+        max-width: 500px;
+    }
+    
+    .recent-updates ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .recent-updates li {
+        background-color: rgba(52, 152, 219, 0.1);
+        padding: 8px 12px;
+        margin-bottom: 5px;
+        border-radius: 4px;
+        border-left: 3px solid #3498db;
+        font-size: 0.9em;
     }
     
     .navigation {
@@ -73,6 +111,15 @@ layout: default
         
         .welcome-section h2 {
             font-size: 1.5em;
+        }
+        
+        .recent-updates {
+            max-width: 100%;
+        }
+        
+        .recent-updates li {
+            font-size: 0.85em;
+            padding: 6px 10px;
         }
         
         .navigation {
