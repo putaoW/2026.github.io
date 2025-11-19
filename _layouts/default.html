@@ -210,11 +210,11 @@
         <main>
             {% if page.url != '/' %}
             <header>
+                {% if page.title == nil or page.title == "" %}
                 <h1>{{ site.title }}</h1>
+                {% endif %}
             </header>
             <a href="/" class="back-link">← 返回首页</a>
-            {% else %}
-                <!-- 主页不显示顶部标题，避免重复 -->
             {% endif %}
             
             <div class="post-content">
