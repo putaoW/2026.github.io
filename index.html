@@ -6,15 +6,8 @@ layout: default
     <h2>一个简洁且可复刻的博客</h2>
     <p>梦到啥我就往这上面写</p>
     
-    <div class="recent-updates">
-        <h3>近期更新</h3>
-        <ul>
-            <li>2025-11-19: 优化底部版权信息清晰度并改进搜索功能</li>
-            <li>2025-11-19: 删除主页代码框，移除重复标题，优化标题清晰度</li>
-            <li>2025-11-19: 修复背景图片铺满屏幕、移除footer分割线</li>
-            <li>2025-11-19: 添加主页仓库链接直接跳转、博文时间显示和搜索功能</li>
-            <li>2025-11-19: 修复文章显示问题：使用标准的_posts目录和Jekyll配置</li>
-        </ul>
+    <div class="code-animation">
+        <pre id="bad-apple-animation" class="animation-display">Loading...</pre>
     </div>
     
     <nav class="navigation">
@@ -53,25 +46,25 @@ layout: default
         line-height: 1.4;
     }
     
-    .recent-updates {
-        text-align: left;
+    .code-animation {
+        text-align: center;
         margin: 15px auto;
         max-width: 500px;
     }
     
-    .recent-updates ul {
-        list-style-type: none;
-        padding: 0;
+    .animation-display {
+        background-color: #000;
+        color: #0f0;
+        padding: 15px;
+        border-radius: 8px;
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+        line-height: 1.2;
+        text-align: left;
+        overflow: hidden;
+        height: 150px;
         margin: 0;
-    }
-    
-    .recent-updates li {
-        background-color: rgba(52, 152, 219, 0.1);
-        padding: 8px 12px;
-        margin-bottom: 5px;
-        border-radius: 4px;
-        border-left: 3px solid #3498db;
-        font-size: 0.9em;
+        border: 1px solid #3498db;
     }
     
     .navigation {
@@ -149,3 +142,95 @@ layout: default
         }
     }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const animationDisplay = document.getElementById('bad-apple-animation');
+    
+    // 简化的ASCII动画帧
+    const frames = [
+        "　　★　　★　　★　　　★　★　　★　",
+        "　★★★★★★★★★★★★★★★★　",
+        "　★★★★★★★★★★★★★★★★　",
+        "　★★★★★★★★★★★★★★★★　",
+        "　★★★★★★★★★★★★★★★★　",
+        "　★★★★★★★★★★★★★★★★　",
+        "　★★★★★★★★★★★★★★★★　",
+        "　★★★★★★★★★★★★★★★★　",
+        "　★★★★★★★★★★★★★★★★　",
+        "　★★★★★★★★★★★★★★★★　",
+        "　★★★★★★★★★★★★★★★★　",
+        "　★★★★★★★★★★★★★★★★　",
+        "　★★★★★★★★★★★★★★★★　",
+        "　★★★★★★★★★★★★★★★★　",
+        "　★★★★★★★★★★★★★★★★　",
+        "　★★★★★★★★★★★★★★★★　",
+        "　★★★★★★★★★★★★★★★★　",
+        "　★★★★★★★★★★★★★★★★　",
+        "　★★★★★★★★★★★★★★★★　",
+        "　　★　　★　　★　　　★　★　　★　"
+    ];
+    
+    // 代码流效果
+    const codeLines = [
+        "const blog = {",
+        "  title: '一个简洁且可复刻的博客',",
+        "  author: '御坂10056号',",
+        "  description: '梦到啥我就往这上面写',",
+        "  features: [",
+        "    '文章列表',",
+        "    '搜索功能',",
+        "    '响应式设计',",
+        "    '代码动画'", 
+        "  ]",
+        "};",
+        "",
+        "// 初始化博客系统",
+        "function initBlog() {",
+        "  loadArticles();",
+        "  setupSearch();",
+        "  animateWelcome();",
+        "  return true;",
+        "}",
+        "",
+        "initBlog();",
+        "console.log('博客系统已启动');",
+        ">>> LOADING BLOG...",
+        ">>> LOADING COMPLETE!",
+        ">>> WELCOME TO BLOG"
+    ];
+    
+    let currentLine = 0;
+    let currentText = '';
+    let isDeleting = false;
+    let animationSpeed = 100;
+    
+    function typeEffect() {
+        const currentCodeLine = codeLines[currentLine % codeLines.length];
+        
+        if (!isDeleting && currentText.length < currentCodeLine.length) {
+            // 正在输入
+            currentText = currentCodeLine.substring(0, currentText.length + 1);
+        } else if (isDeleting && currentText.length > 0) {
+            // 正在删除
+            currentText = currentCodeLine.substring(0, currentText.length - 1);
+        } else {
+            // 切换状态
+            isDeleting = !isDeleting;
+            if (!isDeleting) {
+                currentLine++;
+            }
+        }
+        
+        animationDisplay.textContent = currentText;
+        
+        // 根据当前状态调整速度
+        animationSpeed = isDeleting ? 50 : 100;
+        
+        setTimeout(typeEffect, animationSpeed);
+    }
+    
+    // 启动动画
+    setTimeout(typeEffect, 500);
+});
+</script>
