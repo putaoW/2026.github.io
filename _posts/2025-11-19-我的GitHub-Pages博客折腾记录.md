@@ -1,7 +1,3 @@
----
-layout: post
----
-
 # 我的GitHub Pages博客折腾记录
 
 作为一个热爱技术的初三学生，我一直想拥有一个属于自己的博客来记录学习心得和折腾经历。这个博客项目（[yubanmeiqin10056.github.io](https://yubanmeiqin10056.github.io/)）记录了我的成长历程和技术探索。

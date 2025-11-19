@@ -29,6 +29,9 @@ defaults:
     values:
       layout: "default"
 
+# 允许处理没有YAML front matter的文件
+safe: false
+
 # 排除文件
 exclude:
   - Gemfile
