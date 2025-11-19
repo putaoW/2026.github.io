@@ -36,6 +36,10 @@ title: 博客文章列表
             {% endif %}
         </div>
 
+        <div class="search-highlight" style="display: none; margin-top: 10px; padding: 10px; background-color: #fff3cd; border: 1px solid #ffeaa7; border-radius: 4px; font-size: 0.9em;">
+            <p><strong>匹配内容:</strong> <span class="highlight-text"></span></p>
+        </div>
+
         <footer class="post-footer">
             <a class="read-more" href="{{ post.url | relative_url }}">阅读全文 →</a>
         </footer>
@@ -51,14 +55,47 @@ title: 博客文章列表
         const posts = document.querySelectorAll('.post-item');
 
         searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
+            const searchTerm = this.value.trim().toLowerCase();
             
             posts.forEach(post => {
                 const title = post.getAttribute('data-title').toLowerCase();
                 const content = post.getAttribute('data-content').toLowerCase();
                 
-                if (title.includes(searchTerm) || content.includes(searchTerm)) {
+                const titleMatch = title.includes(searchTerm);
+                const contentMatch = content.includes(searchTerm);
+                
+                if (titleMatch || contentMatch) {
                     post.style.display = 'block';
+                    
+                    // 如果有匹配内容，显示高亮片段
+                    if (contentMatch && searchTerm) {
+                        const highlightDiv = post.querySelector('.search-highlight');
+                        const highlightText = highlightDiv.querySelector('.highlight-text');
+                        
+                        // 找到匹配关键词的上下文
+                        const contentText = post.getAttribute('data-content');
+                        const searchTermIndex = contentText.toLowerCase().indexOf(searchTerm);
+                        
+                        if (searchTermIndex !== -1) {
+                            // 取匹配词前后的文本作为上下文
+                            const start = Math.max(0, searchTermIndex - 50);
+                            const end = Math.min(contentText.length, searchTermIndex + searchTerm.length + 100);
+                            
+                            let context = contentText.substring(start, end);
+                            if (start > 0) context = '...' + context;
+                            if (end < contentText.length) context = context + '...';
+                            
+                            // 高亮显示搜索词
+                            context = context.replace(new RegExp('(' + searchTerm + ')', 'gi'), '<mark>$1</mark>');
+                            
+                            highlightText.innerHTML = context;
+                            highlightDiv.style.display = 'block';
+                        } else {
+                            highlightDiv.style.display = 'none';
+                        }
+                    } else {
+                        post.querySelector('.search-highlight').style.display = 'none';
+                    }
                 } else {
                     post.style.display = 'none';
                 }
