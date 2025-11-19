@@ -209,17 +209,16 @@
     <div class="container">
         <main>
             {% if page.url != '/' %}
-            <header>
-                <h1>{{ site.title }}</h1>
-            </header>
             <a href="/" class="back-link">← 返回首页</a>
-            {% else %}
-                <!-- 主页不显示顶部标题，避免重复 -->
             {% endif %}
             
             <div class="post-content">
                 {% if page.title %}
                 <h1>{{ page.title }}</h1>
+                {% else %}
+                    {% if page.url != '/' %}
+                    <h1>{{ site.title }}</h1>
+                    {% endif %}
                 {% endif %}
                 
                 {% if page.date %}
