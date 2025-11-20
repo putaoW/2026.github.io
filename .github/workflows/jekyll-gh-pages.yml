@@ -1,7 +1,7 @@
 name: Deploy Jekyll with Custom Dependencies
 on:
   push:
-    branches: ["main"]
+    branches: ["main"]  # 主分支是 master 则改为 ["master"]
   workflow_dispatch:
 
 permissions:
@@ -25,14 +25,17 @@ jobs:
         with:
           enablement: true
 
-      - name: Install system dependencies
-        run: sudo apt-get update && sudo apt-get install -y build-essential libssl-dev libsass-dev
+      # 安装 sass-embedded 必需的系统依赖（关键补充）
+      - name: Install system dependencies for sass-embedded
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libssl-dev libsass-dev libcurl4-openssl-dev
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.3.5"
-          bundler-cache: true
+          ruby-version: "3.3.5"  # 兼容 sass-embedded 1.75+
+          bundler-cache: true  # 缓存依赖，加速构建
 
       - name: Build Jekyll site
         run: bundle exec jekyll build
