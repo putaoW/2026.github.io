@@ -44,8 +44,8 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          name: github-pages-artifact
-          path: ./_site
+          # 关键：删除 name 配置，使用默认产物名称 "github-pages"
+          path: ./_site  # 仅保留路径配置，产物名称自动为 "github-pages"
           retention-days: 1
 
   deploy:
